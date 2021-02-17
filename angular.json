@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "projects": {
+    "sandbox": {
+      "projectType": "application",
+      "root": "apps/sandbox",
+      "sourceRoot": "apps/sandbox/src",
+      "prefix": "ng-http",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/sandbox",
+            "main": "apps/sandbox/src/main.ts",
+            "tsConfig": "apps/sandbox/tsconfig.app.json",
+            "bundleDependencies": true
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "apps/sandbox/src/environments/environment.ts",
+                  "with": "apps/sandbox/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/sandbox/tsconfig.app.json",
+              "apps/sandbox/tsconfig.spec.json",
+              "apps/sandbox/tsconfig.editor.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/sandbox/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/sandbox"],
+          "options": {
+            "jestConfig": "apps/sandbox/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "platform": {
+      "projectType": "library",
+      "root": "libs/platform",
+      "sourceRoot": "libs/platform/src",
+      "prefix": "ng-http",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/platform/src/**/*.ts",
+              "libs/platform/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/platform"],
+          "options": {
+            "jestConfig": "libs/platform/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "server": {
+      "projectType": "library",
+      "root": "libs/server",
+      "sourceRoot": "libs/server/src",
+      "prefix": "ng-http",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/server/src/**/*.ts",
+              "libs/server/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/server"],
+          "options": {
+            "jestConfig": "libs/server/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "defaultProject": "sandbox"
+}
