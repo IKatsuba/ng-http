@@ -6,7 +6,9 @@ The project was created only to demonstrate the capabilities of Angular.
 For creating server just write:
 ```html
 <server port="8080">
-  <get url="/some-url" someController></get>
+  <get url="/some-url" contentType="text/html">
+    <b>Some content</b>
+  </get>
 </server>
 ```
 

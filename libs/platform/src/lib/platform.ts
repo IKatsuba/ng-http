@@ -8,14 +8,14 @@ import {
 } from '@angular/core';
 import { ɵplatformCoreDynamic as platformCoreDynamic } from '@angular/platform-browser-dynamic';
 import { DOCUMENT } from '@angular/common';
-import { ElementSchemaRegistry, ResourceLoader } from '@angular/compiler';
+import { ElementSchemaRegistry } from '@angular/compiler';
 
 import { HttpElementSchemaRegistry } from './schema-registry';
-import { TerminalSanitizer } from './sanitizer';
+import { HttpSanitizer } from './sanitizer';
 
 const COMMON_PROVIDERS = [
   { provide: DOCUMENT, useValue: {} },
-  { provide: Sanitizer, useClass: TerminalSanitizer, deps: [] },
+  { provide: Sanitizer, useClass: HttpSanitizer, deps: [] },
 ];
 
 const COMPILER_PROVIDERS = [
