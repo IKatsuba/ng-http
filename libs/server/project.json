@@ -1,0 +1,38 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/server/src",
+  "prefix": "ng-http",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:package",
+      "outputs": ["dist/libs/server"],
+      "options": {
+        "project": "libs/server/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/server/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/server/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/server"],
+      "options": {
+        "jestConfig": "libs/server/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/server/**/*.ts", "libs/server/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

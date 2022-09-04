@@ -43,6 +43,6 @@ export class HttpElementSchemaRegistry extends ElementSchemaRegistry {
     _userProvidedProp: string,
     val: string | number
   ): { error: string; value: string } {
-    return { error: null, value: val.toString() };
+    return { error: '', value: val.toString() };
   }
 }

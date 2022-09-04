@@ -1,0 +1,46 @@
+{
+  "projectType": "application",
+  "sourceRoot": "apps/sandbox/src",
+  "prefix": "ng-http",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:server",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/sandbox",
+        "main": "apps/sandbox/src/main.ts",
+        "tsConfig": "apps/sandbox/tsconfig.app.json",
+        "bundleDependencies": true
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "apps/sandbox/src/environments/environment.ts",
+              "with": "apps/sandbox/src/environments/environment.prod.ts"
+            }
+          ],
+          "sourceMap": false,
+          "optimization": true
+        }
+      },
+      "defaultConfiguration": ""
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/sandbox/**/*.ts", "apps/sandbox/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/sandbox"],
+      "options": {
+        "jestConfig": "apps/sandbox/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

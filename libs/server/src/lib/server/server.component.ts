@@ -7,6 +7,7 @@ import {
 import { Server } from '@rxnode/http';
 import { EMPTY, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ServerOptions } from 'http';
 
 @Component({
   selector: 'server',
@@ -19,7 +20,11 @@ import { tap } from 'rxjs/operators';
 export class ServerComponent extends Server {
   public listen$: Observable<void> = EMPTY;
 
-  private _port: number;
+  private _port!: number;
+
+  constructor() {
+    super();
+  }
 
   @Input() set port(value: number) {
     if (this._port !== value) {

@@ -1,5 +1,7 @@
 import {
+  ApplicationInitStatus,
   ApplicationModule,
+  ApplicationRef,
   ErrorHandler,
   NgModule,
   RendererFactory2,
@@ -12,6 +14,8 @@ import { HttpErrorHandler } from './error-handler';
   providers: [
     { provide: RendererFactory2, useClass: HttpRendererFactory },
     { provide: ErrorHandler, useClass: HttpErrorHandler },
+    { provide: ApplicationRef, useClass: ApplicationRef },
+    { provide: ApplicationInitStatus, useClass: ApplicationInitStatus },
   ],
 })
 export class PlatformModule {}

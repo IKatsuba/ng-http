@@ -1,5 +1,8 @@
-<server port="8080">
+<server [port]="8080">
   <get url="/some-url" contentType="text/html">
     <b>Some content</b>
+    <script>
+      alert('Hello world!');
+    </script>
   </get>
 </server>

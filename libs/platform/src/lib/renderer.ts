@@ -14,6 +14,7 @@ export class HttpRendererFactory implements RendererFactory2 {
     this.renderer = new HttpRenderer();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   end() {}
 
   createRenderer(hostElement: any, type: RendererType2 | null): Renderer2 {
@@ -22,10 +23,11 @@ export class HttpRendererFactory implements RendererFactory2 {
 }
 
 export class HttpElement {
+  [key: string]: any;
   public children: HttpElement[] = [];
   private readonly classes: string[] = [];
   private readonly attrs: Map<string, string> = new Map();
-  parent: HttpElement = null;
+  parent: HttpElement | null = null;
   constructor(private name: string) {}
 
   addClass(className: string) {
@@ -46,7 +48,7 @@ export class HttpElement {
     }
   }
 
-  nextSibling(): HttpElement {
+  nextSibling(): HttpElement | null {
     const parent = this.parent;
     if (parent) {
       const index = parent.children.indexOf(this);
@@ -77,6 +79,7 @@ export class HttpElement {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   removeStyle(style: string, flags?: RendererStyleFlags2): void {}
 
   setAttribute(name: string, value: string): void {
@@ -87,13 +90,14 @@ export class HttpElement {
     this[name] = value;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setStyle(style: string, value: any, flags?: RendererStyleFlags2): void {}
 
   setValue(value: string): void {
     this.setAttribute('value', value);
   }
 
-  toString() {
+  toString(): string {
     return `<${
       this.name
     }${this.classesToString()}${this.attrsToString()}>${this.childrenToString()}</${
@@ -134,7 +138,7 @@ export class TextHttpElement extends HttpElement {
     super('text');
   }
 
-  toString() {
+  override toString() {
     return this.text;
   }
 }
@@ -144,13 +148,13 @@ export class CommentHttpElement extends HttpElement {
     super('comment');
   }
 
-  toString() {
+  override toString() {
     return '';
   }
 }
 
 export class HttpRenderer implements Renderer2 {
-  destroyNode: (node: any) => void;
+  destroyNode!: (node: any) => void;
 
   get data(): { [key: string]: any } {
     return {};
@@ -180,6 +184,7 @@ export class HttpRenderer implements Renderer2 {
     return new CommentHttpElement(value);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   destroy(): void {}
 
   insertBefore(
@@ -195,6 +200,7 @@ export class HttpRenderer implements Renderer2 {
     eventName: string,
     callback: (event: any) => boolean | void
   ): () => void {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     return function () {};
   }
 
@@ -202,7 +208,7 @@ export class HttpRenderer implements Renderer2 {
     return node.nextSibling();
   }
 
-  parentNode(node: HttpElement): HttpElement {
+  parentNode(node: HttpElement): HttpElement | null {
     return node.parent;
   }
 

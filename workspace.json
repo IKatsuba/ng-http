@@ -1,0 +1,9 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "platform": "libs/platform",
+    "sandbox": "apps/sandbox",
+    "server": "libs/server"
+  }
+}

@@ -13,14 +13,16 @@ import { defer } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GetComponent {
-  @Input() url: string;
+  @Input() url!: string;
 
   messages$ = this.server.pipe(
     filter(
       ([req]) =>
-        !!this.url && req.url.indexOf(this.url) === 0 && req.method === 'GET'
+        !!this.url && req.url?.indexOf(this.url) === 0 && req.method === 'GET'
     ),
-    concatMap(([req, res]) => defer(() => this.controller.handle(req, res)))
+    concatMap(([req, res]) =>
+      defer(() => this.controller.handle(req, res) ?? Promise.resolve())
+    )
   );
 
   constructor(private server: Server, @Self() private controller: Controller) {}
